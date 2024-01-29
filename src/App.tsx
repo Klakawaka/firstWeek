@@ -4,7 +4,6 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import { FormEvent, useState } from 'react'
 
-// ... (existing imports)
 
 function AlbumPicker() {
   const [albums, setAlbums] = useState<{ title: string; date: string }[]>([]);
@@ -21,7 +20,7 @@ function AlbumPicker() {
       releases: { title: string; 'date': string }[];
     };
 
-    // Log mbResult to the console
+ 
     console.log(mbResult);
 
     const { releases } = mbResult;
@@ -51,7 +50,7 @@ function AlbumPicker() {
   );
 }
 
-// ... (rest of the code)
+
 
 
 
