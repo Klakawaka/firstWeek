@@ -6,7 +6,7 @@ import { FormEvent, useState } from 'react'
 
 
 function AlbumPicker() {
-  const [albums, setAlbums] = useState<{ title: string; date: string }[]>([]);
+  const [albums, setAlbums] = useState<{ title: string; date: string, count: string }[]>([]);
 
   async function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -17,16 +17,17 @@ function AlbumPicker() {
     const url = `https://musicbrainz.org/ws/2/release?fmt=json&query=artist:${artist}`;
     const response = await fetch(url);
     const mbResult = (await response.json()) as {
-      releases: { title: string; 'date': string }[];
+      releases: { title: string; 'date': string; 'track-count': string }[];
     };
 
  
     console.log(mbResult);
 
     const { releases } = mbResult;
-    const albumsWithDate = releases.map(({ title, 'date': date }) => ({
+    const albumsWithDate = releases.map(({ title, 'date': date ,'track-count': count}) => ({
       title,
       date,
+      count
     }));
     setAlbums(albumsWithDate);
   }
@@ -42,7 +43,7 @@ function AlbumPicker() {
       <ul>
         {albums.map((album) => (
           <li key={album.title}>
-            <strong>{album.title}</strong> - Release Date: {album.date}
+            <strong>{album.title}</strong> - Release Date: {album.date} - Tracks: {album.count}
           </li>
         ))}
       </ul>
